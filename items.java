@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package orderingsystem;
+
 import java.io.*;
 
 /**
@@ -26,12 +27,7 @@ public class items implements Serializable{
     }
     
     //constructor
-    public items(String name, double price)
-    {
-        this.name = name;
-        this.price = price;
-    }
-    
+ 
     //the following are setters and getters
     public String getName()
     {

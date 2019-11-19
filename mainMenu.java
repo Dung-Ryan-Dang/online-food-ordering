@@ -17,8 +17,10 @@ import java.awt.event.ActionListener;
  * @author eslemus
  */
 public class mainMenu extends javax.swing.JFrame {
-    double price;
-    double total=0;
+    double total;
+    items Breakfast = new items();
+    items Taco = new items();
+    items Drink= new items();
     /**
      * Creates new form mainMenu
      */
@@ -499,29 +501,42 @@ public class mainMenu extends javax.swing.JFrame {
     private void drinksComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drinksComboBoxActionPerformed
 
         cardLayout.show(cardPanel, "drinksPanel");
+        
         if(drinksComboBox.getSelectedItem() == "Horchata")
         {
-            drinkItem.setText("Horchata - $3.5");
-             price=3.5;
-             total= total+price;
+            drinkItem.setText("Horchata");
+             
+             Drink.setName("Horchata");
+             Drink.setPrice(3.5);
+             total= total+Drink.getPrice();
+             
+             
         }
         else if(drinksComboBox.getSelectedItem() == "Jamaica")
         {
-            drinkItem.setText("Jamaica - $3.25");
-            price=3.25;
-            total = total + price;
+            drinkItem.setText("Jamaica");
+            
+            Drink.setName("Jamaica");
+            Drink.setPrice(3.25);
+            total = total + Drink.getPrice();
         }
         else if(drinksComboBox.getSelectedItem() == "Sprite")
         {
-            drinkItem.setText("Sprite - $2.75");
-            price=2.75;
-            total=total+price;
+            drinkItem.setText("Sprite");
+            
+            
+            Drink.setName("Sprite");
+            Drink.setPrice(2.75);
+            total=total+ Drink.getPrice();
         }
         else if(drinksComboBox.getSelectedItem() == "Coca-Cola")
         {
-            drinkItem.setText("Coca-Cola - $2.75");
-            price=2.75;
-            total=total+price;
+            drinkItem.setText("Coca-Cola");
+     
+           
+            Drink.setName("Cola");
+            Drink.setPrice(2.75);
+             total=total+ Drink.getPrice();
         }
         
     }//GEN-LAST:event_drinksComboBoxActionPerformed
@@ -568,20 +583,56 @@ public class mainMenu extends javax.swing.JFrame {
         cardLayout.show(cardPanel, "tacosPanel");
         
         if(tacosComboBox.getSelectedItem() == "Grilled Beef")
+        {
             tacosItem.setText("Grilled Beef");
+            Taco.setName("Grilled Beef Taco");
+            Taco.setPrice(2.75);
+            total=total+Taco.getPrice();
+        }
         else if(tacosComboBox.getSelectedItem() == "Grilled Chicken")
+        {
             tacosItem.setText("Grilled Chicken");
+             Taco.setName("Grilled chicken Taco");
+            Taco.setPrice(2.5);
+            total=total+Taco.getPrice();
+        }
         else if(tacosComboBox.getSelectedItem() == "Pastor")
+        {
             tacosItem.setText("Pastor");
+            Taco.setName("Pastor Taco");
+            Taco.setPrice(2.25);
+            total=total+Taco.getPrice();
+        }
         else if(tacosComboBox.getSelectedItem() == "Barbacoa")
+        {
             tacosItem.setText("Barbacoa");
+            Taco.setName("Barbacoa Taco");
+            Taco.setPrice(2.5);
+            total=total+Taco.getPrice();
+        }
     }//GEN-LAST:event_tacosComboBoxActionPerformed
 
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
         // TODO add your handling code here:
-        
+        //writes to a file
+        if(evt.getSource() == payBtn)
+        {
+            try {
+                PrintWriter out = new PrintWriter(new FileWriter("TestFile.txt"));
+                checkoutTextArea.write(out);
+                out.close();
+
+            } catch (IOException e1) {
+                System.err.println("Error occurred");
+                e1.printStackTrace();
+            }
+        }
+    
     }//GEN-LAST:event_payBtnActionPerformed
 
+    
+    
+    
     private void bfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bfBtnActionPerformed
                 //BREAKFAST: writes to Review Order Panel
         String type = breakfastItem.getText();
@@ -598,6 +649,7 @@ public class mainMenu extends javax.swing.JFrame {
         checkoutTextArea.append(type);
         checkoutTextArea.append("\n   > Tortilla Style: " + style +
             "\n   > First Topping: " + firstTop + "\n   > Second Topping: " + secTop + "\n");
+        checkoutTextArea.append("The total is: "+ total + "\n");
 
     }//GEN-LAST:event_bfBtnActionPerformed
 
@@ -606,9 +658,20 @@ public class mainMenu extends javax.swing.JFrame {
         cardLayout.show(cardPanel, "breakfastPanel");
         
         if(breakfastComboBox.getSelectedItem() == "Breakfast Burrito")
+        {
             breakfastItem.setText("Breakfast Burrito");
+            Breakfast.setName("Breakfast Burrito");
+            Breakfast.setPrice(5.25);
+            total= total+ Breakfast.getPrice();
+            
+        }
         else if(breakfastComboBox.getSelectedItem() == "Breakfast Taco")
+        {
             breakfastItem.setText("Breakfast Taco");
+            Breakfast.setName("Breakfast Taco");
+            Breakfast.setPrice(4.75);
+            total= total+ Breakfast.getPrice();
+        }
     }//GEN-LAST:event_breakfastComboBoxActionPerformed
 
     private void tacosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tacosBtnActionPerformed
@@ -631,6 +694,7 @@ public class mainMenu extends javax.swing.JFrame {
         checkoutTextArea.append(type + " Tacos \n");         
         checkoutTextArea.append("  > Tortilla Style: "+ editStyle +
             "\n   > Pick it off:" + toppings + "\n");
+        checkoutTextArea.append("The total is: "+ total + "\n");
 
         //the following resets the window
         drinksComboBox.setVisible(false);
@@ -645,17 +709,21 @@ public class mainMenu extends javax.swing.JFrame {
 
     private void drinksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drinksBtnActionPerformed
         //TACOS: writes to Review Order Panel
-        
+       
         String text =  drinkItem.getText();
-        
+
         //the following resets the window
         drinksComboBox.setVisible(false);
         breakfastComboBox.setVisible(false);
         tacosComboBox.setVisible(false);
         cardLayout.show(cardPanel, "homePanel"); //hides any of the 3 types of panel
 
-        checkoutTextArea.append("\n Drink: " + text);
-        checkoutTextArea.append("The total is: "+total +"\n");
+        checkoutTextArea.append("Drink: ");
+        checkoutTextArea.append(Drink.getName()+ "\n");
+        
+        checkoutTextArea.append("The total is: "+ total+ "\n");
+        
+        
     }//GEN-LAST:event_drinksBtnActionPerformed
 
       
@@ -709,7 +777,7 @@ public class mainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel drinkItem;
     private javax.swing.JLabel drinkLbl;
     private javax.swing.JButton drinksBtn;
-    private javax.swing.JComboBox<String> drinksComboBox;
+    public javax.swing.JComboBox<String> drinksComboBox;
     private javax.swing.JPanel drinksPanel;
     private javax.swing.JPanel homePanel;
     private javax.swing.JLabel jLabel1;
