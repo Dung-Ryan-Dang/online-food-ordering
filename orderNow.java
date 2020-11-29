@@ -8,6 +8,7 @@ package orderingsystem;
 /**
  *
  * @author eslemus
+ * @author dang
  */
 public class orderNow extends javax.swing.JFrame {
 
