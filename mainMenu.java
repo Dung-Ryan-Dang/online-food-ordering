@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 /**
  *
  * @author eslemus
+ * @author dang
  */
 public class mainMenu extends javax.swing.JFrame {
     double price;
